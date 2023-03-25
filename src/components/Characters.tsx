@@ -8,8 +8,14 @@ interface Char {
   id: string;
   votes: number;
 }
-const fetchListOfChars = async () => {
-  const response = await fetch( import.meta.env.VITE_HOST + 'characters/all-characters');
+const fetchListOfChars = async (user: null | Twitch.ext.Authorized) => {
+  const response = await fetch( import.meta.env.VITE_HOST + 'characters/all-characters', {
+    method: 'GET',
+    headers:{
+      'token': user ? user.token : '',
+      'user-id': user ? user.userId : '',
+    },
+  });
   const json = await response.json();
   return json;
 };
@@ -42,7 +48,7 @@ const Characters = () => {
 
   useEffect(() => {
     async function startFetchingListOfChars() {
-      const json = await fetchListOfChars();
+      const json = await fetchListOfChars(user);
 
       setCharacters(json);
     }
