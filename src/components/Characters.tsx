@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./User";
 
 interface Char {
-  title: string;
+  name: string;
   img: string;
   id: string;
   votes: number;
 }
 const fetchListOfChars = async () => {
-  const response = await fetch(`list.json`);
+  console.log(import.meta.env);
+  const response = await fetch( import.meta.env.VITE_HOST + 'characters/all-characters');
   const json = await response.json();
   return json;
 };
@@ -38,8 +39,8 @@ const Characters = () => {
       <ul className="list-none">
         {characters.map((char: Char) => (
           <li key={char.id}>
-            <input id={char.title} name="char" type="radio" />
-            <label htmlFor={char.title}>{char.title}</label>
+            <input id={char.name} name="char" type="radio" />
+            <label htmlFor={char.name}>{char.name}</label>
           </li>
         ))}
       </ul>
