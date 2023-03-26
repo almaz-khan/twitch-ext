@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Characters from './components/Characters'
+import CharactersList from './components/CharactersList'
 import { UserContext } from './components/User';
 
 function App() {
@@ -12,16 +12,16 @@ function App() {
     
   }, [])
 
-  return (
+  return(
     <UserContext.Provider value={user}>
-      <div className="container">
+      <div className="container mx-auto">
         <header className="flex-col">
-          <h1>List of Characters</h1>
-        <Characters />
+          <h2 className="p-2 text-lg">Select you favorite character</h2>
+        <CharactersList />
         </header>
       </div>
-    </UserContext.Provider>
-  );
+    </UserContext.Provider>)
+  ;
 }
 
 export default App
