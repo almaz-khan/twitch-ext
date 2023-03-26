@@ -25,6 +25,7 @@ export const Character = ({
           <input
             className="absolute bottom-0 left-0"
             id={char.id}
+            checked={char.isMyVote}
             name="char"
             type="radio"
             onInput={() => {

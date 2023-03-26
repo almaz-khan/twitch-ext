@@ -54,15 +54,23 @@ const CharactersList = () => {
   }, []);
 
   const isAuthorized = user?.userId?.[0] === 'U';
+  const voted = characters.some((char: Char) => char.isMyVote);
 
   return (
     <div className="px-2">
       <ul className="list-none">
-        {characters.map((char: Char) => (
-          <Character char={char} setSelectedCharacter={setSelectedCharacter} />
-        ))}
+        {characters
+          .sort((a: Char, b: Char) => b.votes - a.votes)
+          .map((char: Char) => (
+            <Character
+              char={char}
+              setSelectedCharacter={setSelectedCharacter}
+            />
+          ))}
       </ul>
-      {isAuthorized ? (
+      {voted ? (
+        <p>You have already voted!</p>
+      ) : isAuthorized ? (
         <button
           className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
           type="submit"
