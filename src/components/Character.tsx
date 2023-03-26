@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { UserContext } from "./User";
+import { useContext } from 'react';
+import { UserContext } from './User';
 
 export interface Char {
   name: string;

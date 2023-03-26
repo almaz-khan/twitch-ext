@@ -1,27 +1,28 @@
 import { useEffect, useState } from 'react';
-import CharactersList from './components/CharactersList'
+import CharactersList from './components/CharactersList';
 import { UserContext } from './components/User';
 
 function App() {
   const [user, setUser] = useState<null | Twitch.ext.Authorized>(null);
 
   useEffect(() => {
-    window.Twitch.ext.onAuthorized(function(user) {
+    window.Twitch.ext.onAuthorized(function (user) {
       setUser(user);
     });
-    
-  }, [])
+  }, []);
 
-  return(
+  return user?.userId ? (
     <UserContext.Provider value={user}>
       <div className="container mx-auto">
         <header className="flex-col">
           <h2 className="p-2 text-lg">Select you favorite character</h2>
-        <CharactersList />
+          <CharactersList />
         </header>
       </div>
-    </UserContext.Provider>)
-  ;
+    </UserContext.Provider>
+  ) : (
+    <div>Loading</div>
+  );
 }
 
-export default App
+export default App;
